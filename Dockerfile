@@ -22,6 +22,7 @@ RUN ln -s /code/marzban-cli.py /usr/bin/marzban-cli \
     && marzban-cli completion install --shell bash 
 
 RUN ls -la
+RUN marzban-cli admin import-from-env
 
 CMD ["bash", "-c", "alembic upgrade head; python main.py"]
 EXPOSE 8000
