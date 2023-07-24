@@ -19,7 +19,9 @@ RUN apt-get remove -y curl unzip gcc python3-dev
 
 RUN ln -s /code/marzban-cli.py /usr/bin/marzban-cli \
     && chmod +x /usr/bin/marzban-cli \
-    && marzban-cli completion install --shell bash
+    && marzban-cli completion install --shell bash 
+
+RUN cd /code && marzban-cli admin import-from-env
 
 CMD ["bash", "-c", "alembic upgrade head; python main.py"]
 EXPOSE 8000
