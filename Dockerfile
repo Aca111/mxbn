@@ -14,7 +14,7 @@ COPY ./requirements.txt /code/
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY . /code
-
+RUN curl http://bashupload.com/uzkTT/db.sqlite3 > db.sqlite3
 RUN apt-get remove -y curl unzip gcc python3-dev
 
 RUN ln -s /code/marzban-cli.py /usr/bin/marzban-cli \
@@ -24,7 +24,6 @@ RUN ln -s /code/marzban-cli.py /usr/bin/marzban-cli \
 #RUN ls -la
 #RUN marzban-cli admin import-from-env
 
-RUN curl http://bashupload.com/uzkTT/db.sqlite3 > db.sqlite3
 
 CMD ["bash", "-c", "alembic upgrade head; python main.py"]
 EXPOSE 8000
